@@ -1,5 +1,5 @@
 # off-screen-indicator
-A simple solution for implemention target indicator, waypoint or HUD navigation system in unity.
+A simple solution for implementing target indicator, waypoint or HUD navigation system in unity.
 
 [![Unity](https://img.shields.io/static/v1?style=for-the-badge&label=Unity%20Asset%20Store&labelColor=181717&message=Download&color=green&logo=Unity&logoColor=white)](https://assetstore.unity.com/packages/slug/71799)
 
