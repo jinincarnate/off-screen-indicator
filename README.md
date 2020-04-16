@@ -2,6 +2,7 @@
 A simple solution for implementing target indicator, waypoint or HUD navigation system in unity.
 
 [![Unity](https://img.shields.io/static/v1?style=for-the-badge&label=Unity%20Asset%20Store&labelColor=181717&message=Download&color=green&logo=Unity&logoColor=white)](https://assetstore.unity.com/packages/slug/71799)
+Will always try to keep the asset store version updated but you can always get the latest version from the Repository.
 
 ## Steps to setup up the targeting system
 
