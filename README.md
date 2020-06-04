@@ -1,6 +1,7 @@
 # off-screen-indicator
 A simple solution for implementing target indicator, waypoint or HUD navigation system in unity.
 
+## Asset store asset is outdated by one commit on 4th June 2020, will remove this statement when its updated on asset store.
 [![Unity](https://img.shields.io/static/v1?style=for-the-badge&label=Unity%20Asset%20Store&labelColor=181717&message=Download&color=green&logo=Unity&logoColor=white)](https://assetstore.unity.com/packages/slug/71799)
 Will always try to keep the asset store version updated but you can always get the latest version from the Repository.
 
