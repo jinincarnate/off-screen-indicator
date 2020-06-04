@@ -59,6 +59,11 @@ public class OffScreenIndicator : MonoBehaviour
                 indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
                 indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
             }
+            else
+            {
+                target.indicator?.Activate(false);
+                target.indicator = null;
+            }
             if(indicator)
             {
                 indicator.SetImageColor(target.TargetColor);// Sets the image color of the indicator.
