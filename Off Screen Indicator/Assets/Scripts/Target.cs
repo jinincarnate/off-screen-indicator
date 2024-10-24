@@ -103,5 +103,14 @@ namespace PixelPlay.OffScreenIndicator
             float distanceFromCamera = Vector3.Distance(cameraPosition, transform.position);
             return distanceFromCamera;
         }
+
+        /// <summary>
+        /// Sets the target color.
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetTargetColor(Color color)
+        {
+            targetColor = color;
+        }
     }
 }
