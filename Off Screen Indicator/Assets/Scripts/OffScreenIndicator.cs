@@ -15,10 +15,13 @@ namespace PixelPlay.OffScreenIndicator
         [Range(0.5f, 0.9f)]
         [Tooltip("Distance offset of the indicators from the centre of the screen")]
         [SerializeField] private float screenBoundOffset = 0.9f;
+        [SerializeField] private bool updateScreenBoundsOnScreenChange = false;
 
         private Camera mainCamera;
         private Vector3 screenCentre;
         private Vector3 screenBounds;
+        private ScreenOrientation currentOrientation;
+        private float currentAspectRatio;
 
         private List<Target> targets = new List<Target>();
 
@@ -29,11 +32,14 @@ namespace PixelPlay.OffScreenIndicator
             mainCamera = Camera.main;
             screenCentre = new Vector3(Screen.width, Screen.height, 0) / 2;
             screenBounds = screenCentre * screenBoundOffset;
+            currentOrientation = Screen.orientation;
+            currentAspectRatio = (float)Screen.width / Screen.height;
             TargetStateChanged += HandleTargetStateChanged;
         }
 
         void LateUpdate()
         {
+            CheckScreenOrientation();
             DrawIndicators();
         }
 
@@ -74,6 +80,31 @@ namespace PixelPlay.OffScreenIndicator
                     indicator.SetTextRotation(Quaternion.identity); // Sets the rotation of the distance text of the indicator.
                 }
             }
+        }
+
+        /// <summary>
+        /// Check if the screen orientation has changed and update the screen bounds accordingly.
+        /// </summary>
+        private void CheckScreenOrientation()
+        {
+            if (updateScreenBoundsOnScreenChange && (currentOrientation != Screen.orientation || HasAspectRatioChanged()))
+            {
+                screenCentre = new Vector3(Screen.width, Screen.height, 0) / 2;
+                screenBounds = screenCentre * screenBoundOffset;
+                currentAspectRatio = (float)Screen.width / Screen.height;
+                currentOrientation = Screen.orientation;
+            }
+        }
+
+        /// <summary>
+        /// Check if the aspect ratio has changed.
+        /// Using Mathf.Approximately to compare the aspect ratio as floating point values can have precision issues.
+        /// </summary>
+        /// <returns></returns>
+        private bool HasAspectRatioChanged()
+        {
+            float cAp = (float)Screen.width / Screen.height;
+            return !Mathf.Approximately(cAp, currentAspectRatio);
         }
 
         /// <summary>
