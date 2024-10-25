@@ -1,69 +1,72 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxObjectPool : MonoBehaviour
+namespace PixelPlay.OffScreenIndicator
 {
-    public static BoxObjectPool current;
-
-    [Tooltip("Assign the box prefab.")]
-    public Indicator pooledObject;
-    [Tooltip("Initial pooled amount.")]
-    public int pooledAmount = 1;
-    [Tooltip("Should the pooled amount increase.")]
-    public bool willGrow = true;
-
-    List<Indicator> pooledObjects;
-
-    void Awake()
+    public class BoxObjectPool : MonoBehaviour
     {
-        current = this;
-    }
+        public static BoxObjectPool current;
 
-    void Start()
-    {
-        pooledObjects = new List<Indicator>();
+        [Tooltip("Assign the box prefab.")]
+        public Indicator pooledObject;
+        [Tooltip("Initial pooled amount.")]
+        public int pooledAmount = 1;
+        [Tooltip("Should the pooled amount increase.")]
+        public bool willGrow = true;
 
-        for (int i = 0; i < pooledAmount; i++)
+        List<Indicator> pooledObjects;
+
+        void Awake()
         {
-            Indicator box = Instantiate(pooledObject);
-            box.transform.SetParent(transform, false);
-            box.Activate(false);
-            pooledObjects.Add(box);
+            current = this;
         }
-    }
 
-    /// <summary>
-    /// Gets pooled objects from the pool.
-    /// </summary>
-    /// <returns></returns>
-    public Indicator GetPooledObject()
-    {
-        for (int i = 0; i < pooledObjects.Count; i++)
+        void Start()
         {
-            if (!pooledObjects[i].Active)
+            pooledObjects = new List<Indicator>();
+
+            for (int i = 0; i < pooledAmount; i++)
             {
-                return pooledObjects[i];
+                Indicator box = Instantiate(pooledObject);
+                box.transform.SetParent(transform, false);
+                box.Activate(false);
+                pooledObjects.Add(box);
             }
         }
-        if (willGrow)
-        {
-            Indicator box = Instantiate(pooledObject);
-            box.transform.SetParent(transform, false);
-            box.Activate(false);
-            pooledObjects.Add(box);
-            return box;
-        }
-        return null;
-    }
 
-    /// <summary>
-    /// Deactive all the objects in the pool.
-    /// </summary>
-    public void DeactivateAllPooledObjects()
-    {
-        foreach (Indicator box in pooledObjects)
+        /// <summary>
+        /// Gets pooled objects from the pool.
+        /// </summary>
+        /// <returns></returns>
+        public Indicator GetPooledObject()
         {
-            box.Activate(false);
+            for (int i = 0; i < pooledObjects.Count; i++)
+            {
+                if (!pooledObjects[i].Active)
+                {
+                    return pooledObjects[i];
+                }
+            }
+            if (willGrow)
+            {
+                Indicator box = Instantiate(pooledObject);
+                box.transform.SetParent(transform, false);
+                box.Activate(false);
+                pooledObjects.Add(box);
+                return box;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Deactive all the objects in the pool.
+        /// </summary>
+        public void DeactivateAllPooledObjects()
+        {
+            foreach (Indicator box in pooledObjects)
+            {
+                box.Activate(false);
+            }
         }
     }
 }

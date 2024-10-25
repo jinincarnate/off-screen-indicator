@@ -42,7 +42,7 @@ namespace PixelPlay.OffScreenIndicator
 
             // When the targets are behind the camera their projections on the screen (WorldToScreenPoint) are inverted,
             // so just invert them.
-            if(screenPosition.z < 0)
+            if (screenPosition.z < 0)
             {
                 screenPosition *= -1;
             }
@@ -58,7 +58,7 @@ namespace PixelPlay.OffScreenIndicator
             // m is the slope
             // c is y intercept which will be 0, as line is passing through origin.
             // Final equation will be y = mx.
-            if(screenPosition.x > 0)
+            if (screenPosition.x > 0)
             {
                 // Keep the x screen position to the maximum x bounds and
                 // find the y screen position using y = mx.
@@ -69,13 +69,13 @@ namespace PixelPlay.OffScreenIndicator
                 screenPosition = new Vector3(-screenBounds.x, -screenBounds.x * slope, 0);
             }
             // Incase the y ScreenPosition exceeds the y screenBounds 
-            if(screenPosition.y > screenBounds.y)
+            if (screenPosition.y > screenBounds.y)
             {
                 // Keep the y screen position to the maximum y bounds and
                 // find the x screen position using x = y/m.
                 screenPosition = new Vector3(screenBounds.y / slope, screenBounds.y, 0);
             }
-            else if(screenPosition.y < -screenBounds.y)
+            else if (screenPosition.y < -screenBounds.y)
             {
                 screenPosition = new Vector3(-screenBounds.y / slope, -screenBounds.y, 0);
             }
